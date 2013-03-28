@@ -23,6 +23,11 @@ unsigned int env_length(char** env);
  */
 void env_set(char*** env, char* name, char* value);
 
+/*
+ * Gets all keys from env pairs.
+ */
+char** env_keys(char** env);
+
 #ifdef __cplusplus
 }
 #endif

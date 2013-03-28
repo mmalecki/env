@@ -80,3 +80,24 @@ void env_set(char*** env, char* name, char* value) {
   env__cat(pair, name, value);
   (*env)[index] = pair;
 }
+
+char** env_keys(char** env) {
+  int i, index, length;
+  char* name;
+  char** result;
+
+  length = env_length(env);
+
+  result = malloc((length + 1) * sizeof(char*));
+  for (i = 0; i < length; i++) {
+    index = strchr(env[i], '=') - env[i];
+    if (index > 0) {
+      name = malloc(index + 1);
+      strncpy(name, env[i], index);
+      result[i] = name;
+    }
+  }
+  result[length] = NULL;
+
+  return result;
+}

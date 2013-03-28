@@ -7,6 +7,7 @@
 
 int main(int argc, char** argv) {
   char** env = malloc(2 * sizeof(char*));
+  char** keys;
 
   env[0] = "NAME=value";
   env[1] = NULL;
@@ -27,6 +28,12 @@ int main(int argc, char** argv) {
   assert(strcmp(env_get(env, "NAME"), "set value") == 0);
   assert(strcmp(env_get(env, "NEW_NAME"), "new value") == 0);
   assert(env_length(env) == 2);
+
+  keys = env_keys(env);
+  assert(strcmp(keys[0], "NAME") == 0);
+  assert(strcmp(keys[1], "NEW_NAME") == 0);
+  assert(keys[2] == NULL);
+  free(keys);
 
   return 0;
 }
