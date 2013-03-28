@@ -10,6 +10,19 @@ extern "C" {
  */
 char* env_get(char** env, char* name);
 
+/*
+ * Gets number of env pairs from `env`.
+ */
+unsigned int env_length(char** env);
+
+/*
+ * Sets environment variable called `name` to value `value` in list of env
+ * pairs `env`.
+ * Please note that this needs pointer to `env`, as reallocation might be
+ * needed.
+ */
+void env_set(char*** env, char* name, char* value);
+
 #ifdef __cplusplus
 }
 #endif
