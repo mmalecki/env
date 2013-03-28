@@ -1,0 +1,4 @@
+*.o
+test/test-env
+libenv.a
+.*.sw[op]
