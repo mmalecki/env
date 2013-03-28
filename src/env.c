@@ -17,6 +17,12 @@ int env__find(char** env, char* name) {
   return -1;
 }
 
+void env__cat(char* dest, char* name, char* value) {
+  strcat(dest, name);
+  strcat(dest, "=");
+  strcat(dest, value);
+}
+
 unsigned int env_length(char** env) {
   unsigned int i = 0;
   while (env[i++] != NULL);
@@ -60,17 +66,13 @@ void env_set(char*** env, char* name, char* value) {
     *env = realloc(*env, (length + 2) * sizeof(char*));
 
     pair = malloc(name_length + 1 + value_length + 1);
-    strcat(pair, name);
-    strcat(pair, "=");
-    strcat(pair, value);
+    env__cat(pair, name, value);
 
     (*env)[length] = pair;
     (*env)[length + 1] = NULL;
   }
 
   pair = malloc(name_length + 1 + value_length + 1);
-  strcat(pair, name);
-  strcat(pair, "=");
-  strcat(pair, value);
+  env__cat(pair, name, value);
   (*env)[index] = pair;
 }
