@@ -36,7 +36,6 @@ char* env_get(char** env, char* name) {
   unsigned int name_length, value_length;
 
   name_length = strlen(name);
-  index = env__find(env, name);
 
   if ((index = env__find(env, name)) == -1)
     return NULL;
