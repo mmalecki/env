@@ -72,6 +72,10 @@ void env_set(char*** env, char* name, char* value) {
     (*env)[length + 1] = NULL;
   }
 
+  /*
+   * This leaks. There's no way to free `(*env)[index]` because we can't tell
+   * if it was allocated or put on heap.
+   */
   pair = malloc(name_length + 1 + value_length + 1);
   env__cat(pair, name, value);
   (*env)[index] = pair;
