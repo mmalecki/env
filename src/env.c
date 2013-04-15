@@ -100,3 +100,29 @@ char** env_keys(char** env) {
 
   return result;
 }
+
+char** env_copy(char** source, char** dest) {
+  int i;
+  int length = env_length(source);
+  int var_length;
+
+  if (dest == NULL) {
+    dest = malloc((length + 1) * sizeof(char*));
+  }
+
+  for (i = 0; i < length; i++) {
+    var_length = strlen(source[i]);
+    dest[i] = malloc(var_length + 1);
+
+    if (dest[i] == NULL) {
+      return NULL;
+    }
+
+    dest[i] = strncpy(dest[i], source[i], var_length);
+    dest[i][var_length] = '\0';
+  }
+
+  dest[length] = NULL;
+
+  return dest;
+}

@@ -28,6 +28,13 @@ void env_set(char*** env, char* name, char* value);
  */
 char** env_keys(char** env);
 
+/*
+ * Copies `source` environment to `dest` environment (full byte copy).
+ * If `dest` is `NULL`, it'll be allocated.
+ * Returns `dest`.
+ */
+char** env_copy(char** source, char** dest);
+
 #ifdef __cplusplus
 }
 #endif

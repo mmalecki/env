@@ -5,8 +5,12 @@
 
 #include <env.h>
 
+extern char** environ;
+
 int main(int argc, char** argv) {
+  int i;
   char** env = malloc(2 * sizeof(char*));
+  char** env_copy_ = NULL;
   char** keys;
 
   env[0] = "NAME=value";
@@ -34,6 +38,13 @@ int main(int argc, char** argv) {
   assert(strcmp(keys[1], "NEW_NAME") == 0);
   assert(keys[2] == NULL);
   free(keys);
+
+  assert(env_copy_ = env_copy(env, env_copy_));
+  assert(env_length(env) == env_length(env_copy_));
+  for (i = 0; i < env_length(env); i++) {
+    assert(env[i] != env_copy_[i]);
+    assert(strcmp(env[i], env_copy_[i]) == 0);
+  }
 
   return 0;
 }
