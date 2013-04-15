@@ -1,6 +1,6 @@
 OBJS += src/env.o
 
-TEST_OBJS += test/test-env
+TESTS += test/test-env
 
 CFLAGS=-g -Wall -Iinclude
 
@@ -12,12 +12,13 @@ libenv.a: $(OBJS)
 src/%.o: src/%.c
 	gcc $(CFLAGS) -c $< -o $@
 
-test/%: test/%.c
+test/%: test/%.c libenv.a
 	gcc -L. -lenv $(CFLAGS) $< -o $@
 
-test: libenv.a $(OBJS) $(TEST_OBJS)
+test: libenv.a $(TESTS)
 	test/test-env
 
 clean:
-	rm -f libenv.a
-	rm -f $(OBJS)
+	rm -f libenv.a $(OBJS) $(TESTS)
+
+.PHONY: all test clean
