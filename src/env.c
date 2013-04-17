@@ -48,7 +48,7 @@ char* env_get(char** env, char* name) {
   return result;
 }
 
-void env_set(char*** env, char* name, char* value) {
+char** env_set(char** env, char* name, char* value) {
   int index;
   char* pair;
   unsigned int name_length, value_length, length;
@@ -56,19 +56,19 @@ void env_set(char*** env, char* name, char* value) {
   name_length = strlen(name);
   value_length = strlen(value);
 
-  if ((index = env__find(*env, name)) == -1) {
+  if ((index = env__find(env, name)) == -1) {
     /*
      * No pair found. Add one. Reallocate memory assigned to env pairs to make
      * place for new environment variable.
      */
-    length = env_length(*env);
-    *env = realloc(*env, (length + 2) * sizeof(char*));
+    length = env_length(env);
+    env = realloc(env, (length + 2) * sizeof(char*));
 
     pair = malloc(name_length + 1 + value_length + 1);
     env__cat(pair, name, value);
 
-    (*env)[length] = pair;
-    (*env)[length + 1] = NULL;
+    env[length] = pair;
+    env[length + 1] = NULL;
   }
 
   /*
@@ -77,7 +77,9 @@ void env_set(char*** env, char* name, char* value) {
    */
   pair = malloc(name_length + 1 + value_length + 1);
   env__cat(pair, name, value);
-  (*env)[index] = pair;
+  env[index] = pair;
+
+  return env;
 }
 
 char** env_keys(char** env) {

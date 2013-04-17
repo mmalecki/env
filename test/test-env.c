@@ -21,12 +21,12 @@ int main(int argc, char** argv) {
   assert(strcmp(env_get(env, "NAME"), "value") == 0);
   assert(env_get(env, "NOT_FOUND") == NULL);
 
-  env_set(&env, "NAME", "set value");
+  env = env_set(env, "NAME", "set value");
   assert(strcmp(env[0], "NAME=set value") == 0);
   assert(strcmp(env_get(env, "NAME"), "set value") == 0);
   assert(env_length(env) == 1);
 
-  env_set(&env, "NEW_NAME", "new value");
+  env = env_set(env, "NEW_NAME", "new value");
   assert(strcmp(env[0], "NAME=set value") == 0);
   assert(strcmp(env[1], "NEW_NAME=new value") == 0);
   assert(strcmp(env_get(env, "NAME"), "set value") == 0);

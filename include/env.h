@@ -18,10 +18,9 @@ unsigned int env_length(char** env);
 /*
  * Sets environment variable called `name` to value `value` in list of env
  * pairs `env`.
- * Please note that this needs pointer to `env`, as reallocation might be
- * needed.
+ * Returns new `env`.
  */
-void env_set(char*** env, char* name, char* value);
+char** env_set(char** env, char* name, char* value);
 
 /*
  * Gets all keys from env pairs.
