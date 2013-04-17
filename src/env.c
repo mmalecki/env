@@ -69,6 +69,8 @@ char** env_set(char** env, char* name, char* value) {
 
     env[length] = pair;
     env[length + 1] = NULL;
+
+    return env;
   }
 
   /*
