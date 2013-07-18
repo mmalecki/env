@@ -18,6 +18,7 @@ int env__find(char** env, char* name) {
 }
 
 void env__cat(char* dest, char* name, char* value) {
+  dest[0] = '\0';
   strcat(dest, name);
   strcat(dest, "=");
   strcat(dest, value);
