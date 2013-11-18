@@ -34,6 +34,11 @@ char** env_keys(char** env);
  */
 char** env_copy(char** source, char** dest);
 
+/*
+ * Frees an `env` environment.
+ */
+void env_free(char** env);
+
 #ifdef __cplusplus
 }
 #endif
