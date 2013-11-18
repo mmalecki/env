@@ -2,3 +2,4 @@
 test/test-env
 libenv.a
 .*.sw[op]
+*.dSYM
