@@ -16,7 +16,7 @@ test/%: test/%.c libenv.a
 	gcc -L. -lenv $(CFLAGS) $< -o $@
 
 test: libenv.a $(TESTS)
-	test/test-env
+	MallocScribble=1 test/test-env
 
 clean:
 	rm -f libenv.a $(OBJS) $(TESTS)
