@@ -131,3 +131,18 @@ char** env_copy(char** source, char** dest) {
 
   return dest;
 }
+
+void env_free(char** env) {
+  char* s;
+  int i = 0;
+
+  if (env == NULL) {
+    return;
+  }
+
+  while ((s = env[i++]) != NULL) {
+    free(s);
+  }
+
+  free(env);
+}

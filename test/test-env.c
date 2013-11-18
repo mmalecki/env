@@ -11,6 +11,7 @@ int main(int argc, char** argv) {
   int i;
   char** env = malloc(2 * sizeof(char*));
   char** env_copy_ = NULL;
+  char** environ_copy = NULL;
   char** keys;
 
   env[0] = "NAME=value";
@@ -45,6 +46,13 @@ int main(int argc, char** argv) {
     assert(env[i] != env_copy_[i]);
     assert(strcmp(env[i], env_copy_[i]) == 0);
   }
+
+  // We should be able to copy `environ` and free it.
+  environ_copy = env_copy(environ, environ_copy);
+  env_free(environ_copy);
+
+  env_free(env);
+  env_free(env_copy_);
 
   return 0;
 }
