@@ -98,6 +98,7 @@ char** env_keys(char** env) {
     if (index > 0) {
       name = malloc(index + 1);
       strncpy(name, env[i], index);
+      name[index] = '\0';
       result[i] = name;
     }
   }
