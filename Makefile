@@ -10,10 +10,10 @@ libenv.a: $(OBJS)
 	ar rcs $@ $^
 
 src/%.o: src/%.c
-	gcc $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 test/%: test/%.c libenv.a
-	gcc -L. -lenv $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) -o $@ $< ./libenv.a
 
 test: libenv.a $(TESTS)
 	MallocScribble=1 test/test-env
